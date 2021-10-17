@@ -41,18 +41,14 @@ use plotters::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root = BitMapBackend::new("", (1024, 768)).into_drawing_area();
-    let mut chart = ChartBuilder::on(&root)
-        .build_cartesian_2d((), 0u32..500u32)?;
+    let mut chart = ChartBuilder::on(&root).build_cartesian_2d((), 0u32..500u32)?;
 
     // This returns the desired "the trait bound `(): Ranged` is not satisfied" for AsRangedCoord message.
-    // consume_ranged_coord(res_x[0]..res_x.last().copied().unwrap());
+    // consume_ranged_coord(());
 
     Ok(())
 }
 
-
-pub fn consume_ranged_coord<X: plotters::coord::ranged1d::AsRangedCoord>(
-    _x_spec: X,
-) {
+pub fn consume_ranged_coord<X: plotters::coord::ranged1d::AsRangedCoord>(_x_spec: X) {
     unimplemented!()
 }
